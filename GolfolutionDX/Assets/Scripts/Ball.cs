@@ -18,9 +18,9 @@ public class Ball : MonoBehaviour {
     void Update()
     {
         // apply kicking forces when space bar is pressed
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
             rb.AddForce(Vector3.forward * speed, ForceMode.Impulse);
             rb.AddForce(Vector3.up * speed, ForceMode.Impulse);
         }
