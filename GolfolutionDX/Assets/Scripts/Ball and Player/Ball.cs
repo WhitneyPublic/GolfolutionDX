@@ -22,7 +22,11 @@ public class Ball : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector3.forward * speed, ForceMode.Impulse);
+            // get main camera
+            GameObject mainCamera = GameObject.Find("Main Camera");
+            // get the forward direction of the camera
+            Vector3 cameraForward = mainCamera.transform.forward;
+            rb.AddForce(cameraForward * speed, ForceMode.Impulse);
             rb.AddForce(Vector3.up * speed, ForceMode.Impulse);
             // apply a random rotational force to the ball
             Vector3 randSpin = Random.insideUnitSphere * speed * 2;
