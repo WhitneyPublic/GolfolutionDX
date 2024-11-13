@@ -543,9 +543,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2107561390}
-  distance: 30
-  height: 10
+  distance: 32
+  heightOffset: 2
   rotationSpeed: 50
+  minVerticalAngle: 0
+  maxVerticalAngle: 60
 --- !u!1 &1216831558
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,8 +800,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b770998c47ff3c44bfbf31b0e9f3a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  stopThreshold: 0.7
+  stopThreshold: 0.2
+  maxKickForce: 60
+  minKickForce: 5
+  chargeSpeed: 20
 --- !u!82 &2107561393
 AudioSource:
   m_ObjectHideFlags: 0
