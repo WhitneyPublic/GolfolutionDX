@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
     private Rigidbody rb;
+    private AudioSource audioSource;
     //private SphereCollider sc;
     public float speed = 10.0f;
     public float stopThreshold = 0.2f;
@@ -12,6 +13,7 @@ public class Ball : MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         //sc = GetComponent<SphereCollider>();
     }
 
@@ -31,6 +33,10 @@ public class Ball : MonoBehaviour {
             // apply a random rotational force to the ball
             Vector3 randSpin = Random.insideUnitSphere * speed * 2;
             rb.AddTorque(randSpin);
+
+            // play sound
+            audioSource.PlayOneShot(audioSource.clip);
+            
         }
         // stop the ball if it is moving slowly
         if (rb.velocity.magnitude > 0.0f) { // ball is moving
