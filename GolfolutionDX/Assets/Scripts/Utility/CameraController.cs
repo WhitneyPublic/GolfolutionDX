@@ -6,12 +6,12 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform target; // Reference to the Ball GameObject
     public float distance = 10f; // Distance from the target
-    public float height = 5f; // Height above the target
+    public float heightOffset = 2f; // Offset to keep the ball below the center of the screen
     public float rotationSpeed = 50f; // Speed of rotation using arrow keys
-    public float minVerticalAngle = 0f; // Minimum vertical angle (horizontal plane)
+    public float minVerticalAngle = 0f; // Minimum vertical angle (slightly above the horizon)
     public float maxVerticalAngle = 60f; // Maximum vertical angle
 
-    private float currentVerticalAngle = 30f; // Default starting vertical angle
+    private float currentVerticalAngle = 20f; // Default starting vertical angle
     private float currentHorizontalAngle = 0f; // Track horizontal rotation
 
     void Start()
@@ -52,9 +52,13 @@ public class CameraFollow : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(currentVerticalAngle, currentHorizontalAngle, 0);
         Vector3 offset = rotation * new Vector3(0, 0, -distance);
 
-        // Apply height adjustment and position
-        transform.position = target.position + offset + Vector3.up * height;
-        transform.LookAt(target);
+        // Apply position with a height offset to keep the ball below the center
+        transform.position = target.position + offset + Vector3.up * heightOffset;
+
+        // Look at a point slightly above the target to center the view properly
+        Vector3 lookAtPosition = target.position + Vector3.up * heightOffset / 2f;
+        transform.LookAt(lookAtPosition);
     }
 }
+
 

@@ -9,6 +9,9 @@ public class Ball : MonoBehaviour {
     public float speed = 10.0f;
     public float stopThreshold = 0.2f;
 
+    // charging stuff
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +29,9 @@ public class Ball : MonoBehaviour {
         {
             // get main camera
             GameObject mainCamera = GameObject.Find("Main Camera");
-            // get the forward direction of the camera
-            Vector3 cameraForward = mainCamera.transform.forward;
+            // get the horizontal direction of the camera
+            Vector3 cameraForward = (new Vector3(mainCamera.transform.forward.x, 0.0f, mainCamera.transform.forward.z)).normalized;
+            print(cameraForward);
             rb.AddForce(cameraForward * speed, ForceMode.Impulse);
             rb.AddForce(Vector3.up * speed, ForceMode.Impulse);
             // apply a random rotational force to the ball
