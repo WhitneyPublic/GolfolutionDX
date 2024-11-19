@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Ball : MonoBehaviour {
     private Rigidbody rb;
     private AudioSource audioSource;
+
+    public Slider chargeSlider;
+
     public float stopThreshold = 0.2f;
 
     // charging stuff
@@ -20,6 +24,8 @@ public class Ball : MonoBehaviour {
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        chargeSlider.minValue = minKickForce;
+        chargeSlider.maxValue = maxKickForce;
     }
 
     // Update is called once per frame
@@ -59,6 +65,8 @@ public class Ball : MonoBehaviour {
             }
         }
 
+        UpdateUI();
+
     }
 
     void KickBall()
@@ -79,5 +87,12 @@ public class Ball : MonoBehaviour {
 
         // play sound
         audioSource.PlayOneShot(audioSource.clip);
+    }
+
+    void UpdateUI()
+    {
+        Debug.Log($"Updating UI: {currentCharge}");
+        // Update the charge slider
+        chargeSlider.value = currentCharge;
     }
 }
