@@ -91,7 +91,7 @@ public class Ball : MonoBehaviour {
 
     void UpdateUI()
     {
-        Debug.Log($"Updating UI: {currentCharge}");
+        //Debug.Log($"Updating UI: {currentCharge}");
         // Update the charge slider
         chargeSlider.value = currentCharge;
     }
