@@ -12,44 +12,39 @@ public class WallChuckExample : MonoBehaviour
         myChuck = GetComponent<ChuckSubInstance>();
         myGlobalVariableName = myChuck.GetUniqueVariableName("event");
         GetComponent<ChuckSubInstance>().RunCode(string.Format(@"
-		    SawOsc sqr => LPF lpf => dac;
-            Bitcrusher bc => dac;
-            8=> bc.bits;
-            8 => bc.downsample;
-            
+            TriOsc sqr => LPF lpf => dac;
 
-            0.6 => lpf.Q;
+            0.4 => lpf.Q;
             440 => lpf.freq;
+            -1 => int octave;
 
             // our notes
-            [ 46, 53, 58, 60, 62, 63, 65, 67 ,69, 70, 46, 53, 58, 65, 67 ,69, 70 ] @=> int notes[];
+            [ 46, 50, 53, 58, 46, 50, 53, 58, 55, 57, 60 ] @=> int notes[];
 
             // basic play function (add more arguments as needed)
             fun void play( float note )
             {{
                 // start the note
-                Std.mtof( note - 12 )=> sqr.freq;
-                150::ms * Math.random2(0, 8) => now;
+                <<<note>>>;
+                Std.mtof( note + (12 * octave) )=> sqr.freq;
+                150::ms * Math.random2(0, 3) => now;
             }}
             fun void playing() {{
                 while( true ) {{
                     play(notes[Math.random2(0, notes.size() - 1)]);
                 }}
             }}
-
-            global Event {0};
-
             // infinite time-loop
             spork ~ playing();
-
-            {0} => now;
-            lpf =< dac;
-            lpf => bc => dac;
+            
+            global Event {0};
 
             while (true) {{
-                1::second => now;
+                {0} => now;
+                lpf.freq() * 2 => lpf.freq;
+                octave + 1 => octave;
+                10::second => now;
             }}
-
 	    ", myGlobalVariableName));
     }
 
