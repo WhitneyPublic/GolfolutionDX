@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CampfireChuck : MonoBehaviour
+public class VolcanoGoalChuck : MonoBehaviour
 {
     private ChuckSubInstance myChuck;
     string myGlobalVariableName;
@@ -16,10 +16,10 @@ public class CampfireChuck : MonoBehaviour
 
             0.4 => lpf.Q;
             440 => lpf.freq;
-            1 => int octave;
+            -2 => int octave;
 
             // our notes
-            [ 48, 51, 55, 58 ] @=> int notes[];
+            [ 48, 50, 51, 53, 55, 56, 58, 60, 48, 50, 60  ] @=> int notes[];
 
             // basic play function (add more arguments as needed)
             fun void play( float note )
@@ -27,7 +27,7 @@ public class CampfireChuck : MonoBehaviour
                 // start the note
                 //<<<note>>>;
                 Std.mtof( note + (12 * octave) )=> sqr.freq;
-                150::ms * Math.random2(0, 3) => now;
+                120::ms * Math.random2(0, 3) => now;
             }}
             fun void playing() {{
                 while( true ) {{
@@ -43,6 +43,7 @@ public class CampfireChuck : MonoBehaviour
                 {0} => now;
                 lpf.freq() * 2 => lpf.freq;
                 octave + 1 => octave;
+                [ 51, 63  ] @=> int notes[];
                 10::second => now;
             }}
 	    ", myGlobalVariableName));
@@ -62,6 +63,7 @@ public class CampfireChuck : MonoBehaviour
         {
             GetComponent<ChuckSubInstance>().BroadcastEvent(myGlobalVariableName);
             print("Broadcasted event: " + myGlobalVariableName);
+            print("Collision with Ball on goal post volcano!");
         }
 
     }

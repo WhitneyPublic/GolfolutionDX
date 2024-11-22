@@ -6,8 +6,14 @@ public class DayNightCycle : MonoBehaviour
 {
     public Light sunLight; // Assign your Directional Light here
     public float dayDuration = 120f; // Duration of a full day/night cycle in seconds
+    public float startTimestamp = 0f; // Initial timestamp of the cycle, in seconds
+    private float time = 0f; // Tracks time progression in the cycle, starts at mis
 
-    private float time; // Tracks time progression in the cycle
+    void Start()
+    {
+        // Set the initial time
+        time = startTimestamp;
+    }
 
     void Update()
     {

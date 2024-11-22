@@ -25,7 +25,7 @@ public class TentChuck : MonoBehaviour
             fun void play( float note )
             {{
                 // start the note
-                <<<note>>>;
+                //<<<note>>>;
                 Std.mtof( note + (12 * octave) )=> sqr.freq;
                 250::ms * Math.random2(0, 3) => now;
             }}
