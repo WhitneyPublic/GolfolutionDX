@@ -27,7 +27,7 @@ public class DesertChuck : MonoBehaviour
                 // start the note
                 <<<note>>>;
                 Std.mtof( note + (12 * octave) )=> sqr.freq;
-                150::ms * Math.random2(0, 3) => now;
+                80::ms * Math.random2(0, 3) => now;
             }}
             fun void playing() {{
                 while( true ) {{
