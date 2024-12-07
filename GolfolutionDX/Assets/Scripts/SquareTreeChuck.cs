@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RubyChuck : MonoBehaviour
+public class SquareTreeChuck : MonoBehaviour
 {
     private ChuckSubInstance myChuck;
     string myGlobalVariableName;
@@ -14,13 +14,12 @@ public class RubyChuck : MonoBehaviour
         GetComponent<ChuckSubInstance>().RunCode(string.Format(@"
             SawOsc sqr => LPF lpf => dac;
 
-            0.1 => lpf.gain;    
             0.4 => lpf.Q;
-            440 => lpf.freq;
-            0 => int octave;
+            220 => lpf.freq;
+            -1 => int octave;
 
             // our notes
-            [ 48, 50, 51, 53, 55, 56, 58, 60, 48, 50, 60  ] @=> int notes[];
+            [ 46, 50, 53 ] @=> int notes[];
 
             // basic play function (add more arguments as needed)
             fun void play( float note )
@@ -28,7 +27,7 @@ public class RubyChuck : MonoBehaviour
                 // start the note
                 //<<<note>>>;
                 Std.mtof( note + (12 * octave) )=> sqr.freq;
-                120::ms * Math.random2(0, 3) => now;
+                150::ms * Math.random2(0, 3) => now;
             }}
             fun void playing() {{
                 while( true ) {{
@@ -43,7 +42,7 @@ public class RubyChuck : MonoBehaviour
             while (true) {{
                 {0} => now;
                 lpf.freq() * 2 => lpf.freq;
-                octave + 1 => octave;
+                octave + 2 => octave;
                 10::second => now;
             }}
 	    ", myGlobalVariableName));
