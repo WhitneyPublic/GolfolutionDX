@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DesertChuck : MonoBehaviour
+public class DarkTreeChuck : MonoBehaviour
 {
     private ChuckSubInstance myChuck;
     string myGlobalVariableName;
@@ -15,19 +15,19 @@ public class DesertChuck : MonoBehaviour
             SawOsc sqr => LPF lpf => dac;
 
             0.4 => lpf.Q;
-            65.406 => lpf.freq;
-            0 => int octave;
+            440 => lpf.freq;
+            2 => int octave;
 
             // our notes
-            [ 46, 50, 53, 58, 46, 50, 53, 58, 55 ] @=> int notes[];
+            [ 48, 50, 51, 53, 55, 56, 58, 60, 48, 50, 60  ] @=> int notes[];
 
             // basic play function (add more arguments as needed)
             fun void play( float note )
             {{
                 // start the note
-                <<<note>>>;
+                //<<<note>>>;
                 Std.mtof( note + (12 * octave) )=> sqr.freq;
-                80::ms * Math.random2(0, 3) => now;
+                120::ms * Math.random2(0, 3) => now;
             }}
             fun void playing() {{
                 while( true ) {{
@@ -43,6 +43,7 @@ public class DesertChuck : MonoBehaviour
                 {0} => now;
                 lpf.freq() * 2 => lpf.freq;
                 octave + 1 => octave;
+                [ 51, 63  ] @=> int notes[];
                 10::second => now;
             }}
 	    ", myGlobalVariableName));
@@ -62,6 +63,7 @@ public class DesertChuck : MonoBehaviour
         {
             GetComponent<ChuckSubInstance>().BroadcastEvent(myGlobalVariableName);
             print("Broadcasted event: " + myGlobalVariableName);
+            print("Collision with Ball on Dark Tree!");
         }
 
     }

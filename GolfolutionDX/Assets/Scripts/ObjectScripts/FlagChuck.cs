@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DesertChuck : MonoBehaviour
+public class FlagChuck : MonoBehaviour
 {
     private ChuckSubInstance myChuck;
     string myGlobalVariableName;
@@ -12,22 +12,22 @@ public class DesertChuck : MonoBehaviour
         myChuck = GetComponent<ChuckSubInstance>();
         myGlobalVariableName = myChuck.GetUniqueVariableName("event");
         GetComponent<ChuckSubInstance>().RunCode(string.Format(@"
-            SawOsc sqr => LPF lpf => dac;
+            TriOsc sqr => LPF lpf => dac;
 
             0.4 => lpf.Q;
-            65.406 => lpf.freq;
-            0 => int octave;
+            1396.913 => lpf.freq;
+            -1 => int octave;
 
             // our notes
-            [ 46, 50, 53, 58, 46, 50, 53, 58, 55 ] @=> int notes[];
+            [ 46, 50, 53, 58, 46, 50, 53, 58, 55, 57, 60 ] @=> int notes[];
 
             // basic play function (add more arguments as needed)
             fun void play( float note )
             {{
                 // start the note
-                <<<note>>>;
+                //<<<note>>>;
                 Std.mtof( note + (12 * octave) )=> sqr.freq;
-                80::ms * Math.random2(0, 3) => now;
+                150::ms * Math.random2(0, 3) => now;
             }}
             fun void playing() {{
                 while( true ) {{
@@ -51,7 +51,7 @@ public class DesertChuck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)

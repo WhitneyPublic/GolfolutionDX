@@ -15,7 +15,7 @@ public class SnowmanChuck : MonoBehaviour
             SawOsc sqr => LPF lpf => dac;
 
             0.4 => lpf.Q;
-            220 => lpf.freq;
+            1760 => lpf.freq;
             0 => int octave;
 
             // our notes

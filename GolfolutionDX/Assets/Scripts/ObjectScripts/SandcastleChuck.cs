@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DesertChuck : MonoBehaviour
+public class SandcastleChuck : MonoBehaviour
 {
     private ChuckSubInstance myChuck;
     string myGlobalVariableName;
@@ -15,7 +15,7 @@ public class DesertChuck : MonoBehaviour
             SawOsc sqr => LPF lpf => dac;
 
             0.4 => lpf.Q;
-            65.406 => lpf.freq;
+            330 => lpf.freq;
             0 => int octave;
 
             // our notes
@@ -27,7 +27,7 @@ public class DesertChuck : MonoBehaviour
                 // start the note
                 <<<note>>>;
                 Std.mtof( note + (12 * octave) )=> sqr.freq;
-                80::ms * Math.random2(0, 3) => now;
+                150::ms * Math.random2(0, 3) => now;
             }}
             fun void playing() {{
                 while( true ) {{
